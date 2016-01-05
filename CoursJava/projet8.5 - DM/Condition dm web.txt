@@ -1,0 +1,5 @@
+
+
+Nettoyer le data find a la fin de la partie.
+
+Ajouter des condition de fin au memory.
