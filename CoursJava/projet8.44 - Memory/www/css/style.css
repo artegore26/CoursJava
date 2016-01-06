@@ -82,8 +82,8 @@ body{
     display: block;
     position:relative;
     color: #ffffff;
-    top:10%;
-    left:20%;
+    text-align: center;
+    vertical-align: middle;
     font-size: 25px;
     font-weight: bold;
     
@@ -94,6 +94,7 @@ body{
     
     display: block;
     position: absolute;
+    vertical-align: middle;
     color: #1f9191;
     top: 40%;
     font-size: 25px;

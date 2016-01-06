@@ -9,6 +9,8 @@ var _colors = [
     "#8fd5da",
     "#fcb09f"
 ];
+var endGame = false;
+var count = 0;
 var bWait = false;
 
 //wait window loaded before excute some script
@@ -17,13 +19,19 @@ $(function()
     //log message in console
     console.log("Page loaded");
     //call setGrid to generate all Cards
-    //HUB();
+    HUB();
+    //Start();
     
+    
+});
+
+
+function Start()
+{
     setGrid();
     setColors();
     addListeners();
-    
-});
+}
 
 function HUB()
 {
@@ -34,13 +42,34 @@ function HUB()
     text.appendTo(document.body);
     $(".textAlignUp").text("Are you ready to play?")
     $(".textAlign").text("Start");
-    $("#overlay").fadeOut;
-    $("#overlay").fadeIn;
+    
+    $(".button").click(function(e)
+    {
+        Start();
+        $("#overlay").fadeOut();
+        $(".textAlignUp").fadeOut();
+    });
+   // $(""//$("#overlay").fadeOut;
+    //$("#overlay").fadeIn;
+
+}
+
+function endHUB()
+{
+    console.log("mission accomplie")
+    var text = jQuery('<div class="textAlignUp"></div>')
+    var overlay = jQuery('<div id="overlay"><div class="button"><div class="textAlign"></div></div></div>');
+    overlay.appendTo(document.body);
+    text.appendTo(document.body);
+    $(".textAlignUp").text("In", count ,"click done! Well played!")
+    $(".textAlign").text("Retry");
+   // $(""//$("#overlay").fadeOut;
+    //$("#overlay").fadeIn;
 
 }
 
 function setGrid()
-{
+ {
     console.log("Generate Grid");
     
     //loop 16 time to generate each card
@@ -94,6 +123,7 @@ function addListeners()
         
         if(!currentSelection)
         {
+            count = count + 1;
             currentSelection = $(this).attr("data-id");
             $(this).find(".content").addClass("open");
             return;
@@ -122,7 +152,22 @@ function addListeners()
         
         currentSelection = null;
         
+     for(var i = 0; i<nbCards; i++)
+     {
+    var card = $('.card[data-id="'+i+'"]');
+    if(card.attr('data-find') == undefined)
+    {
+    break;
+    };
+    endGame = true;
+    }
+    if(endGame == true)
+    {
+    endHUB();
+    };
+         
         setTimeout(closeAllNotFind, 500);
+        console.log(count);
     });
 }
 
@@ -154,3 +199,18 @@ function setFindById(id)
     
     $el.attr("data-find", true);
 }
+
+/*function endGame()
+{
+    var checkEnd = true
+    
+    if ('.card[data-find]'== false)
+        {
+             $('.card[data-find!="true"] .content').removeClass("open");
+            checkEnd = false;
+        }
+    if (checkEnd==true)
+        {
+            console.log("it's the end");
+        }
+}*/
